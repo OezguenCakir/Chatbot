@@ -7,9 +7,15 @@ const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 
-const BOT_MSGS = ["Du Hurensohn", "Du Bastard"];
+const BOT_MSGS = [
+  "Du Hurensohn",
+  "Du Bastard",
+  "Hundesohn",
+  "letzter Wert"
+];
 
-msgerForm.addEventListener("submit", (event) => {
+
+msgerForm.addEventListener("submit", event => {
   event.preventDefault();
 
   const msgText = msgerInput.value;
@@ -26,6 +32,7 @@ function appendMessage(name, img, side, text) {
   const msgHTML = `
     <div class="msg ${side}-msg">
       <div class="msg-img" style="background-image: url(${img})"></div>
+
       <div class="msg-bubble">
         <div class="msg-info">
           <div class="msg-info-name">${name}</div>
