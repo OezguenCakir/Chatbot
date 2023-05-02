@@ -7,9 +7,9 @@ const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 
-const BOT_MSGS = "Sorry if my answers are not relevant. :))";
+const BOT_MSGS = ["Du Hurensohn", "Du Bastard"];
 
-msgerForm.addEventListener("submit", event => {
+msgerForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const msgText = msgerInput.value;
@@ -22,6 +22,7 @@ msgerForm.addEventListener("submit", event => {
 });
 
 function appendMessage(name, img, side, text) {
+  //   Simple solution for small apps
   const msgHTML = `
     <div class="msg ${side}-msg">
       <div class="msg-img" style="background-image: url(${img})"></div>
@@ -30,6 +31,7 @@ function appendMessage(name, img, side, text) {
           <div class="msg-info-name">${name}</div>
           <div class="msg-info-time">${formatDate(new Date())}</div>
         </div>
+
         <div class="msg-text">${text}</div>
       </div>
     </div>
@@ -39,28 +41,13 @@ function appendMessage(name, img, side, text) {
   msgerChat.scrollTop += 500;
 }
 
-
-async function chatgptResponse() {
-    const prompt = msgerInput.value;
-    const completions = await openai.Completion.create({
-      engine: 'text-davinci-003',
-      prompt,
-      max_tokens: 1024,
-      n: 1,
-      stop: '\n',
-    });
-  
-    const chatgptanswer = completions.choices[0].text.trim();
-    return chatgptanswer
-}
-
-
 function botResponse() {
-  const msgText = BOT_MSGS;
+  const r = random(0, BOT_MSGS.length - 1);
+  const msgText = BOT_MSGS[r];
   const delay = msgText.split(" ").length * 100;
 
   setTimeout(() => {
-    appendMessage(BOT_NAME, BOT_IMG, "left", "Du Hurensohn");
+    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
   }, delay);
 }
 
@@ -72,5 +59,10 @@ function get(selector, root = document) {
 function formatDate(date) {
   const h = "0" + date.getHours();
   const m = "0" + date.getMinutes();
+
   return `${h.slice(-2)}:${m.slice(-2)}`;
+}
+
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
 }
