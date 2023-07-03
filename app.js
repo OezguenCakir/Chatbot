@@ -8,9 +8,9 @@ const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 
 const BOT_MSGS = [
-  "Du Hurensohn",
-  "Du Bastard",
-  "Hundesohn",
+  "Ich liebe dich :)",
+  "Du bist wundervoll",
+  "Hab einen schönen Tag!",
   "letzter Wert"
 ];
 
